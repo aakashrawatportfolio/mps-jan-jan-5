@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Banner with Bootstrap</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    .banner {
+      position: relative;
+      text-align: center;
+      color: #fff;
+    }
+
+    .banner img {
+      width: 100%;
+      height: auto;
+    }
+
+    .banner .banner-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+
+    /* Custom styles */
+    .center-content {
+      display: flex;
+
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20px;
+    }
+
+    .center-content p {
+      text-align: center;
+    }
+
+    #myCarousel .carousel-item .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-attachment: fixed;
+    }
+
+    #myCarousel h4 {
+      font-size: 50px;
+      margin-bottom: 15px;
+      color: #FFF;
+      line-height: 100%;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    #myCarousel p {
+      /* font-size: 18px; */
+      margin-bottom: 15px;
+
+    }
+
+    #myCarousel .carousel-item a {
+
+      font-size: 14px;
+      color: #FFF;
+      padding: 13px 32px;
+      display: inline-block;
+    }
+
+    #myCarousel .carousel-item a:hover {
+      background: #004f9e;
+      text-decoration: none;
+    }
+
+    /* #myCarousel .carousel-item h2 {
+      -webkit-animation-name: fadeInLeft;
+      animation-name: fadeInLeft;
+    }
+
+    #myCarousel .carousel-item p {
+      -webkit-animation-name: slideInRight;
+      animation-name: slideInRight;
+    }
+
+    #myCarousel .carousel-item a {
+      -webkit-animation-name: fadeInUp;
+      animation-name: fadeInUp;
+    } */
+
+    #myCarousel .carousel-item .mask img {
+      -webkit-animation-name: slideInRight;
+      animation-name: slideInRight;
+      display: block;
+      height: auto;
+      max-width: 100%;
+    }
+
+    #myCarousel h2,
+    #myCarousel p,
+    #myCarousel a,
+    #myCarousel .carousel-item .mask img {
+      -webkit-animation-duration: 2s;
+      animation-duration: 1.2s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+
+    #myCarousel .container {
+      max-width: 1430px;
+    }
+
+    #myCarousel .carousel-item {
+      height: 100%;
+      min-height: 350px;
+    }
+
+    #my-content {
+      position: relative;
+      z-index: 1;
+      background-image: url(taj\ banner\ 1.jpg);
+      background-size: cover;
+    }
+
+    .carousel-control-next,
+    .carousel-control-prev {
+      height: 40px;
+      width: 40px;
+      padding: 12px;
+      text-align: center !important;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      background-color: #004f9e;
+    }
+
+
+    .carousel-item {
+      position: relative;
+      display: none;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      width: 100%;
+      transition: -webkit-transform .6s ease;
+      transition: transform .6s ease;
+      transition: transform .6s ease, -webkit-transform .6s ease;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-perspective: 1000px;
+      perspective: 1000px;
+    }
+
+    .carousel-fade .carousel-item {
+      opacity: 0;
+      -webkit-transition-duration: .6s;
+      transition-duration: .6s;
+      -webkit-transition-property: opacity;
+      transition-property: opacity
+    }
+
+    .carousel-fade .carousel-item-next.carousel-item-left,
+    .carousel-fade .carousel-item-prev.carousel-item-right,
+    .carousel-fade .carousel-item.active {
+      opacity: 1
+    }
+
+    .carousel-fade .carousel-item-left.active,
+    .carousel-fade .carousel-item-right.active {
+      opacity: 0
+    }
+
+    .carousel-fade .carousel-item-left.active,
+    .carousel-fade .carousel-item-next,
+    .carousel-fade .carousel-item-prev,
+    .carousel-fade .carousel-item-prev.active,
+    .carousel-fade .carousel-item.active {
+      -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+      transform: translateX(0)
+    }
+
+    @supports (transform-style:preserve-3d) {
+
+      .carousel-fade .carousel-item-left.active,
+      .carousel-fade .carousel-item-next,
+      .carousel-fade .carousel-item-prev,
+      .carousel-fade .carousel-item-prev.active,
+      .carousel-fade .carousel-item.active {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0)
+      }
+    }
+
+    .carousel-fade .carousel-item-left.active,
+    .carousel-fade .carousel-item-next,
+    .carousel-fade .carousel-item-prev,
+    .carousel-fade .carousel-item-prev.active,
+    .carousel-fade .carousel-item.active {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+
+
+
+    @-webkit-keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .fadeInLeft {
+      -webkit-animation-name: fadeInLeft;
+      animation-name: fadeInLeft;
+    }
+
+    @-webkit-keyframes fadeInUp {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @-webkit-keyframes fadeInUp {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .fadeInUp {
+      -webkit-animation-name: fadeInUp;
+      animation-name: fadeInUp;
+    }
+
+
+    @keyframes slideInRight {
+      from {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+      }
+
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .slideInRight {
+      -webkit-animation-name: slideInRight;
+      animation-name: slideInRight;
+    }
+
+    .my-content {
+      background-image: url(taj\ banner\ 1.jpg);
+      background-size: cover;
+      width: 100%;
+      height: 400px;
+
+    }
+
+    .animated-text {
+  display: inline-block;
+  font-family: "arial";
+  font-size: 4vw; /* Adjust font size based on the viewport width */
+  max-width: 100%; /* Ensures the text doesn't overflow its container */
+}
+
+.typed {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 3s steps(30, end) forwards; /* Adjust animation duration */
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+    @media screen and (max-width: 768px) {
+  .animated-text {
+    font-size: 6vw; /* Adjust font size for smaller screens */
+    width: 100%;
+  }
+  .typed{
+    font-size: 5vw;
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div style="margin-bottom: 30px;" class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 p-0">
+        <div class="banner">
+          <img src="Untitled design.png" alt="Banner Image">
+          <div class="banner-content">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- delhi section start from here  -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="center-content">
+
+          <h1 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;">
+            <span style="text-decoration: underline; font-weight: 600; padding: 8px;"> DELHI</span>
+          </h1>
+
+          <p>
+            Delhi, India's captivating capital, beckons tourists with a rich tapestry of history and modernity. Explore
+            iconic landmarks like the Red Fort and Qutub Minar, savor diverse cuisines, and embrace the city's vibrant
+            energy. From bustling markets to the tranquil India Gate, Delhi's dynamic blend makes it a must-visit
+            destination for every traveler.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- slider start here  -->
+  <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+      <!-- Carousel items start -->
+      <div class="carousel-item active">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Welcome to Delhi: Your Gateway </h2>
+                </div>
+                <p>As India's capital, Delhi serves as the gateway to the country. Its well-connected airport, railway
+                  network, and excellent road infrastructure make it the perfect starting point for exploring the
+                  diverse regions and attractions of India.</p>
+                <p>We invite you to delve deeper into Delhi, to explore its hidden gems, to experience its warmth and
+                  hospitality, and to create lasting memories in this incredible city. Whether you're a traveller, a
+                  history enthusiast, a foodie, or an adventurer, Delhi has something extraordinary to offer you.</p>
+                <p>Join us in discovering Delhi, where the past and future unite in a symphony of colours, flavours, and
+                  experiences.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="airport.jpg" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    The Heart of India</h2>
+                </div>
+                <p>Delhi, the sprawling capital of India, is a city that defies easy description. It's a vibrant
+                  metropolis where the past and present coexist in harmony, creating a tapestry of history, culture, and
+                  modernity that is truly unique. Allow us to introduce you to this captivating metropolis.</p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="2.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    A Glimpse of Delhi's Rich History</h2>
+                </div>
+                <p>Delhi's roots run deep into the annals of history. From the ancient Indraprastha of the Mahabharata
+                  era to the mighty Mughal Empire, and later, as the capital of British India, Delhi has witnessed it
+                  all. Explore the architectural wonders of bygone eras, like the Red Fort, Qutub Minar, and Humayun's
+                  Tomb, that stand as testaments to its rich heritage.</p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="3.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Cultural Diversity</h2>
+                </div>
+                <p>
+                  Delhi is a melting pot of cultures, languages, and traditions. You'll experience a harmonious blend of
+                  diverse communities, each contributing its unique flavour to the city's cultural tapestry. From the
+                  bustling streets of Chandni Chowk to the serene spirituality of Akshardham Temple, Delhi has something
+                  for everyone.
+                  .</p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="4.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Modern Marvels</h2>
+                </div>
+                <p>
+                  While Delhi cherishes its history, it also propels itself into the future. The city boasts world-class
+                  infrastructure, vibrant markets, and a thriving tech and business scene. Witness the futuristic Delhi
+                  Metro, shop at swanky malls, and savour international cuisines at top-notch restaurants
+                  .</p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="5.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Exploring Delhi: Food and Authenticity</h2>
+                </div>
+                <p>Delhi is a food lover's paradise. Sample the delectable flavours of North Indian cuisine, savour
+                  spicy street food like chaat and kebabs, or indulge in fine dining experiences at some of the
+                  country's best restaurants. Delhi is also a city of contrasts.
+                  From the serene gardens of Lodi to the chaotic charm of Chandni Chowk, there's something for everyone.
+                  Explore its museums, galleries, and theatres. Take a rickshaw ride through the narrow lanes of Old
+                  Delhi or wander through the lush greenery of its parks. Delhi is a city that continually surprises and
+                  delights
+                </p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+
+              <img src="Gurudwara.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="margin-top: 25px;" class="container">
+      <div class="row">
+        <div class="col-md-5 col-lg-5"></div>
+        <div class="col-md-2 text-center">
+          <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span
+              class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+          <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> <span
+              class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+        </div>
+        <div class="col-md-5 col-lg-5"></div>
+      </div>
+    </div>
+
+
+  </div>
+
+  </div>
+  </div>
+  </div>
+
+  <div class="container mt-5">
+    <h3 class="typed" style="color: #004f9e; text-align: center; font-family: 'High Tower Text', sans-serif;">
+      Travel Tips</h3>
+    <div class="row mt-4">
+      <!-- Left Side -->
+      <div class="col-md-6">
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;">   <i class="fas fa-route icon"></i> How to Reach ?</h3>
+        <p> <b><i style="color:#FFC000; padding-right:5px;" class="fas fa-plane"> </i> Indira Gandhi International Airport </b>offers
+          brilliant connectivity, both domestic and international with 3 terminals being the host of international
+          tourists.</p>
+        <p><b> <i style="color:#FFC000;  padding-right:5px;" class="fas fa-train"></i> New Delhi Railway Station</b>is well connected to all
+          several cities of the country.
+        </p>
+        <p> <i style="color:#FFC000;  padding-right:5px;" class="fas fa-road"></i> Delhi is well connected to all National and State highways to every part of the
+          world.</p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-sun weather-icon"></i>
+          Weather
+        </h3>
+        <p>In September, New Delhi experiences the transition from the monsoon season to early autumn. The weather is
+          generally warm with temperatures ranging from around 25 to 35 degrees Celsius (77 to 95 degrees Fahrenheit).
+        </p>
+      </div>
+
+      <!-- Right Side -->
+      <div class="col-md-6">
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif; "> <i
+            class="fas fa-tshirt clothing-icon"></i> Clothing
+        </h3>
+        <p>Pack modest clothing, especially if planning to visit religious sites. Consider the weather conditions during
+          your stay.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-shield-alt"></i>
+          Safety Guidelines
+        </h3>
+        <p>Be aware of safety guidelines & Covid Guidelines issued by the government.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-car car-icon"></i>
+          Transportation
+        </h3>
+        <p>For local transportation you may use local taxis, KIOSK bases cabs and/or App based cabs.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"><i class="fas fa-passport"></i> Visa
+          Requirements
+        </h3>
+        <p>
+          Check and obtain the necessary visa for your stay in India. For more details please
+          <a href="https://www.mpsnewdelhi.org/visa-information">click here</a>.
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- kerala start from here -->
+
+  <div style="margin-top: 30px;" id="myCarousel222" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="center-content">
+              <h1 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;">
+                <span style="text-decoration: underline; font-weight: 600; margin-bottom: 4px;">KERALA</span>
+              </h1>
+
+              <p>
+                Kerala, often referred to as "God's Own Country," is a picturesque state located in the southwestern
+                part of India. Known for its breathtaking natural beauty, rich cultural heritage, and vibrant
+                traditions, Kerala is a top destination for tourists seeking a unique and immersive experience.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- slider start here  -->
+      <div id="myCarousel1" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+          <!-- Carousel items start -->
+          <div class="carousel-item active">
+          
+              <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div style="position: relative;">
+                    <img src="backwter.png" class="img-fluid" alt="Right Side Image"
+                      style="border-radius: 20px; position: absolute; left: 0; top: 0;">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Backwaters</h2>
+                    </div>
+                    <p>Kerala is renowned for its serene backwaters, a network of
+                      interconnected canals, rivers, lakes, and lagoons. A houseboat cruise through the backwaters,
+                      especially in Alleppey and Kumarakom, offers a tranquil and scenic experience. The lush greenery,
+                      coconut palms, and traditional villages along the waterways provide a glimpse into the authentic
+                      Kerala lifestyle.
+                      .</p>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="beaches.jpg" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+                </div>
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Beaches</h2>
+                    </div>
+                    <p>The state is blessed with pristine beaches along its extensive coastline. Kovalam, Varkala, and
+                      Marari are popular beach destinations where visitors can relax on golden sands, enjoy water
+                      sports, and witness mesmerizing sunsets over the Arabian Sea. Kappil is a beautiful
+                      beach-backwater destination located near Varkala, the famous tourist spot. A drive through Kappil
+                      is as scenic as it can get; the road is flanked by the azure blue of the Arabian sea on one side
+                      while the serene waters of Edava Lake is on the other.
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="hills station.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+                </div>
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Hill Stations</h2>
+                    </div>
+                    <p>The Western Ghats in Kerala are adorned with lush hill stations like Munnar, Wayanad, and
+                      Thekkady. These destinations offer cool climates, tea plantations, spice
+                      gardens, and opportunities for trekking, bird watching, and wildlife safaris.
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="wild animal.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+                </div>
+                <div class="col-md-6">
+                  <div class="my-content">
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Wildlife Sanctuaries and National Parks</h2>
+                    </div>
+                    <p>
+                      Periyar National Park and Wildlife Sanctuary, Silent Valley National Park, and Eravikulam National
+                      Park are home to diverse flora and fauna. Elephants, tigers, deer, and various species of birds
+                      can be spotted in these protected areas.
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="dance.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+                </div>
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Cultural Riches</h2>
+                    </div>
+                    <p>
+                      Kerala boasts a rich cultural heritage, with classical art forms like Kathakali and Mohiniyattam,
+                      traditional music, and martial arts such as Kalaripayattu. Visitors can witness these performances
+                      at cultural centers and festivals
+                      .</p>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="ayurveda.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+                </div>
+                <div class="col-md-6">
+                  <div class="my-content">
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Ayurveda and Wellness</h2>
+                    </div>
+                    <p>Kerala is a hub for Ayurvedic treatments and wellness retreats. Visitors can indulge in
+                      rejuvenating
+                      Ayurvedic
+                      massages, spa therapies, and yoga retreats, experiencing the holistic healing traditions of the
+                      region.
+
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="food.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+                </div>
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Culinary Delights</h2>
+                    </div>
+                    <p>Kerala is famous for its delectable cuisine, which includes dishes like appam, puttu, seafood
+                      delicacies, and the traditional Kerala sadhya (feast) served on plaintain leaves. Coconuts grow in
+                      abundance in Kerala, so grated coconut and coconut milk are commonly used for thickening and
+                      flavouring. Visitors can savor these flavors in local eateries and during houseboat cruises.
+
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="plant.png" class="img-fluid" alt="Right Side Image" style="border-radius: 20px;">
+                </div>
+                <div class="col-md-6">
+                  <div class="my-content">
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Plantations</h2>
+                    </div>
+                    <p>The state is a major producer of spices, tea, and coffee. Plantation tours in places like Munnar
+                      provide insights into the cultivation processes and offer picturesque landscapes of endless tea
+                      gardens.
+
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <div style="margin-top: 25px;" class="container">
+    <div class="row">
+      <div class="col-md-5 col-lg-5"></div>
+      <div class="col-md-2 text-center">
+        <a class="carousel-control-prev" href="#myCarousel222" role="button" data-slide="prev"> <span
+            class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+        <a class="carousel-control-next" href="#myCarousel222" role="button" data-slide="next"> <span
+            class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+      </div>
+      <div class="col-md-5 col-lg-5"></div>
+    </div>
+  </div>
+
+
+  </div>
+
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- lower section -->
+  <div class="container mt-5">
+    <h3 class="typed" style="color: #004f9e; text-align: center; font-family: 'High Tower Text', sans-serif;">
+      Travel Tips</h3>
+    <div class="row mt-4">
+      <!-- Left Side -->
+      <div class="col-md-6">
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;">   <i class="fas fa-route icon"></i> How to Reach ?</h3>
+        <p><i style="color:#FFC000;padding-right:5px;" class="fas fa-plane"> </i><b> Cochin International Airport (COK)</b> is the busiest
+          and most well-connected airport in Kerala. It has direct international flights to and from major cities
+          worldwide. Another International airport
+          with flights connecting to various destinations is <b>Trivandrum International Airport (TRV)</b>
+        </p>
+        <p><i style="color:#FFC000;padding-right:5px;" class="fas fa-train"></i> Kerala has an extensive railway network connecting major
+          cities within the state and other parts of India. Tourists can arrive in Kerala by train and disembark at key
+          railway stations like Ernakulam Junction, Thiruvananthapuram Central, and others..
+        </p>
+        <p><i style="color:#FFC000;padding-right:5px;" class="fas fa-road road-icon"></i> Tourists can enter Kerala by road through
+          neighbouring states. There are well-maintained highways and road networks that connect Kerala to major cities
+          in South India.</p>
+        <p><i style="color:#FFC000;padding-right:5px;"class="fas fa-ship ship-icon"></i> Some cruise liners operate in the Arabian Sea,
+          with stops at Kochi (Cochin) as part of their itinerary. Cruise travel provides a unique and scenic entry into
+          Kerala.</p>
+        <h3 style="color: #FFC000; padding-right:5px; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-sun weather-icon"></i>
+          Weather
+        </h3>
+        <p>The temperatures in Kerala during September are typically warm and humid. Daytime temperatures can range from
+          25 to 30 degrees Celsius (77 to 86 degrees Fahrenheit), with slightly cooler evenings.
+        </p>
+      </div>
+
+      <!-- Right Side -->
+      <div class="col-md-6">
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i
+            class="fas fa-tshirt clothing-icon"></i> Clothing
+        </h3>
+        <p>Lightweight, breathable fabrics such as cotton and linen are ideal for Kerala's warm and humid weather.
+          Temples in Kerala have some specific restrictions to jeans or short dresses for both men and women.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-shield-alt"></i>
+          Safety Guidelines
+        </h3>
+        <p>Be aware of safety guidelines & Covid Guidelines issued by the government.
+
+
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-car car-icon"></i>
+          Transportation
+        </h3>
+        <p>For local transportation you may use local taxis, KIOSK bases cabs and/or App based cabs.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"><i class="fas fa-passport"></i> Visa
+          Requirements
+        </h3>
+        <p>
+          Check and obtain the necessary visa for your stay in India. For more details please
+          <a href="https://www.mpsnewdelhi.org/visa-information">click here</a>.
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- andman and nicobar -->
+  <div style="margin-top: 30px;" id="myCarousel11" class="carousel slide carousel-fade" data-ride="carouse">
+    <div class="carousel-inner">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="center-content">
+              <!-- <h1 style="color: #FFC000; font-family: 'Goudy Stout', sans-serif;">ANDAMAN & NICOBAR ISLANDS</h1> -->
+              <h1 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;">
+                <span style="text-decoration: underline; font-weight: 600; margin-bottom: 4px;">ANDAMAN & NICOBAR ISLAND</span>
+              </h1>
+              <p>
+                The Andaman and Nicobar Islands are a group of picturesque islands at the southeastern edge of India in
+                the Bay of
+                Bengal. Known for their stunning natural beauty, rich
+                biodiversity, and diverse cultural heritage, these islands are a popular tourist destination. Here's a
+                glimpse of what the Andaman and Nicobar Islands have to offer for tourism:
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- slider start here  -->
+      <div id="myCarousel2" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+          <!-- Carousel items start -->
+          <div class="carousel-item active">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="my-content">
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Pristine Beaches</h2>
+                    </div>
+                    <p><b>Radhanagar Beach (Havelock Island)</b><br>
+                      Renowned as one of Asia's best beaches, Radhanagar Beach boasts white sands and crystal-clear
+                      turquoise waters.
+                      <br><b>Corbyn's Cove Beach (Port Blair)</b><br>
+                      A serene beach close to the capital city, offering water sports and a relaxed atmosphere.
+                      <br> <b>Laxmanpur Beach (Neil Island)</b><br>
+                      Known for its breathtaking sunset views.
+
+                    </p>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+
+                  <img src="2a.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                       Water Activities</h2>
+                    </div>
+                    <p><b>Scuba Diving</b><br>
+                      Explore vibrant coral reefs and diverse marine life at Havelock Island, Neil Island, and North
+                      Bay.
+                      <br><b>Snorkeling</b><br>
+                      North Bay and Red Skin Island are popular for snorkeling, providing opportunities to witness
+                      colorful coral formations and marine species.
+                      <br> <b>Sea Walking</b><br>
+                      Experience underwater walking at North Bay, where a helmet allows you to explore the ocean floor.
+
+                    </p>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="animated-content">
+                    <img src="3a.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+                    <!-- style="border-radius: 0px; animation-name: slideInRight; animation-duration: 1s; animation-delay:
+                    0.5s; animation-fill-mode: both;"> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Historical Sites</h2>
+                    </div>
+                    <p><b>Cellular Jail (Port Blair)</b><br>
+                      A historic jail that once housed Indian political prisoners
+                      during the British rule, now serving as a museum showcasing the struggle for independence.
+                      <br><b>Ross Island</b><br>
+                      The erstwhile administrative headquarters of the British, now in ruins, with a historical ambiance
+                      and beautiful views.
+
+                    </p>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="animated-content">
+                    <img src="4a.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Island Hopping</h2>
+                    </div>
+                    <p>
+                      <b>Havelock Island</b> <br>
+                      Apart from Radhanagar Beach, Havelock offers Elephant
+                      Beach for water activities and Kalapathar Beach for its scenic beauty.
+                      <br><b>Neil Island</b> <br>
+                      Known for its laid-back atmosphere, natural bridge formation, and beautiful beaches like Laxmanpur
+                      and Bharatpur.
+                      <br><b>Baratang Island</b><br>
+                      Home to limestone caves, mangrove creeks, and the famous Mud Volcano.
+
+                    </p>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <img src="5a.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Wildlife Sanctuaries</h2>
+                    </div>
+                    <p>
+
+                      <b>Mahatma Gandhi Marine National Park</b><br>
+                      Home to diverse marine life, this park offers glass-bottom boat rides for a glimpse of the
+                      underwater world.
+                      <br> <b>Saddle Peak National Park (North Andaman)</b><br>
+                      Known for its biodiversity, trekking trails, and the highest point in the Andaman Islands.
+
+                    </p>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <img src="6a.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Cultural Exploration</h2>
+                    </div>
+                    <p><b>Tribal Culture</b>
+                      Learn about the indigenous tribes of the Andaman and Nicobar Islands, such as the Great
+                      Andamanese, Onge, Jarawa, and Sentinalese.<br>
+                      <b>Anthropological Museum (Port Blair)</b>
+                      Showcasing the cultural heritage of the indigenous tribes through artifacts and exhibits.
+
+
+                    </p>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <img src="7a.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="my-content">
+
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                        Adventure Sports</h2>
+                    </div>
+                    <p><b>Kayaking</b><br>
+                      Explore mangrove creeks and coastal areas through kayaking.
+                      <br><b>Trekking</b><br>
+                      Enjoy trekking trails in places like Mount Harriet National Park and Saddle Peak National Park.
+
+
+                    </p>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <img src="8a.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="my-content">
+                    <div class="animated-text">
+                      <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                      Shopping and Cuisine</h2>
+                    </div>
+                    <p><b>Aberdeen Bazaar (Port Blair)</b><br>
+                      Shop for local handicrafts, pearl jewelry, and souvenirs.<br>
+                      <b>Try Local Seafood</b><br>
+                      Indulge in fresh seafood, coconut-based dishes, and other local delicacies.
+                    </p>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <img src="9a.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <div style="margin-top: 25px;" class="container">
+    <div class="row">
+      <div class="col-md-5 col-lg-5"></div>
+      <div class="col-md-2 text-center">
+        <a class="carousel-control-prev" href="#myCarousel11" role="button" data-slide="prev"> <span
+            class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+        <a class="carousel-control-next" href="#myCarousel11" role="button" data-slide="next"> <span
+            class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+      </div>
+      <div class="col-md-5 col-lg-5"></div>
+    </div>
+  </div>
+
+
+  </div>
+
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="container mt-5">
+    <h3 class="typed" style="color: #004f9e; text-align: center; font-family: 'High Tower Text', sans-serif;">
+     Travel Tips</h3>
+    <div class="row mt-4">
+      <!-- Left Side -->
+      <div class="col-md-6">
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;">   <i class="fas fa-route icon"></i> How to Reach ?</h3>
+        <p><i style="color:#FFC000;padding-right:5px;" class="fas fa-plane"> </i>The fastest and most common way to reach the Andaman and
+          Nicobar Islands is by air.<b>Veer Savarkar International Airport</b> is an international airport located 2 km
+          (1.2
+          mi) south of Port Blair Flights which operate from major Indian cities such as Delhi, Kolkata, Chennai, and
+          Mumbai.
+        </p>
+        <p><i style="color:#FFC000;padding-right:5px;" class="fas fa-train"></i> Every major city in Rajasthan like Jaipur, Jodhpur,
+          Udaipur, Bikaner and Ajmer have Railway stations which are well connected from Delhi and other places of the
+          country.
+        </p>
+        <p><i style="color:#FFC000;padding-right:5px;"class="fas fa-road road-icon"></i> Rajasthan is well-connected by a network of
+          national highways & state highways. They are well-maintained and connect different cities and towns within
+          Rajasthan.</p>
+        <p><i style="color:#FFC000;padding-right:5px;"class="fas fa-ship ship-icon"></i> Andaman, and Nicobar Islands, operates regular
+          passenger ship services between the
+          mainland (Kolkata, Chennai, and Visakhapatnam) and the islands. The journey by sea takes longer compared to
+          air travel but provides a unique experience. Ships offer different classes of
+          accommodation, including deluxe cabins and dormitories. Private cruise companies also operate luxury cruises
+          to the Andaman Islands. These cruises usually depart from Kolkata, Chennai, or
+          Visakhapatnam and offer a more comfortable and leisurely journey.
+        </p>
+        <h3 style="color: #FFC000;padding-right:5px; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-sun weather-icon"></i>
+          Weather
+        </h3>
+        <p>In September, the Andaman and Nicobar Islands experience the transition from the southwest monsoon season to
+          the post-monsoon period.
+        </p>
+      </div>
+
+      <!-- Right Side -->
+      <div class="col-md-6">
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i
+            class="fas fa-tshirt clothing-icon"></i> Clothing
+        </h3>
+        <p>Be prepared for some humidity and carry light, breathable clothing.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-shield-alt"></i>
+          Safety Guidelines
+        </h3>
+        <p>Be aware of safety guidelines & Covid Guidelines issued by the government.
+
+
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-car car-icon"></i>
+          Transportation
+        </h3>
+        <p>Upon reaching Port Blair, you can use taxis and auto-rickshaws for local transportation. Car rentals are also
+          available for more flexibility in exploring the islands. To visit other islands like Havelock, Neil, and Ross,
+          you can use government-operated ferries and private boat services.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"><i class="fas fa-passport"></i> Visa
+          Requirements
+        </h3>
+        <p>
+          Check and obtain the necessary visa for your stay in India. For more details please
+          <a href="https://www.mpsnewdelhi.org/visa-information">click here</a>.
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- Rajesthan section start from here  -->
+  <div style="margin-top: 30px;" class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="center-content">
+          <!-- <h1 style="color: #FFC000; font-family: 'Goudy Stout', sans-serif;">RAJASTHAN</h1> -->
+          <h1 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;">
+            <span style="text-decoration: underline; font-weight: 600; margin-bottom: 4px;">RAJASTHAN</span>
+          </h1>
+
+          <p>
+            Rajasthan, often referred to as the "Land of Kings," is a state in the north western part of India known for
+            its rich history, vibrant culture, and stunning landscapes. Here's a comprehensive overview of the tourist
+            attractions in Rajasthan:
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- slider start here  -->
+  <div id="myCarousel3" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+      <!-- Carousel items start -->
+      <div class="carousel-item active">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                  Jaipur: The Pink City </h2>
+                </div>
+                <p><b>Hawa Mahal</b><br>
+                  A distinctive palace with a façade featuring 953 windows.<br>
+                  <b>City Palace</b><br>
+                  A complex of palaces, courtyards, and gardens showcasing royal heritage.<br>
+                  <b>Jantar Mantar</b><br>
+                  An observatory with a collection of architectural astronomical instruments.<br>
+                  <b>Amber Fort</b><br>
+                  A majestic fort on a hill with intricate architecture and scenic surroundings.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="1r.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Jodhpur: The Blue City</h2>
+                </div>
+                <p><b>Mehrangarh Fort</b><br>
+                  A massive fort offering panoramic views of the city.
+                  Umaid Bhawan Palace: A magnificent palace, partly a museum and partly a royal residence.<br>
+                  <b>Jaswant Thada</b><br>
+                  A beautiful marble cenotaph near Mehrangarh Fort
+                </p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="2r.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Udaipur: The City of Lakes</h2>
+                </div>
+                <p><b>City Palace</b><br>
+                  A sprawling palace complex on the banks of Lake Pichola.
+                  <br><b>Lake Pichola</b> <br>
+                  A serene lake with boat rides and stunning views of the City Palace.
+                  <br><b>Jag Mandir</b><br>
+                  An island palace in Lake Pichola.
+                  <br> <b>Jagdish Temple</b><br>
+                  A large and artistically important Hindu temple.
+                </p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="3r.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Pushkar: The Sacred City</h2>
+                </div>
+                <p>
+                  <b>Pushkar Lake</b><br>
+                  A holy lake surrounded by temples and ghats.
+                  <br><b>Brahma Temple</b><br>
+                  One of the few temples dedicated to Lord Brahma, located in Pushkar.
+                  <br><b>Pushkar Camel Fair</b><br>
+                  An annual camel and livestock fair attracting visitors from around the world.
+                </p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="4r.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Ranthambore </h2>
+                </div>
+                <p> <b>Ranthambore National Park</b><br>Famous for its tiger population, this national park offers wildlife safaris.</p>
+                <p><b>Ranthambore Fort</b><br>An ancient fort within the national park.</p>
+
+                <!-- <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Jaisalmer: The Golden City</h2>
+                </div>
+                <p><b>Jaisalmer Fort</b><br>
+                  A massive fort made of yellow sandstone.
+                  <br><b>Patwon Ki Haveli</b><br>
+                  A collection of five havelis with intricate architecture.
+                  <br><b>Sam Sand Dunes</b><br>
+                  A popular spot for camel safaris and experiencing the desert.
+                </p> -->
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="5r.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+
+                <!-- <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Bikaner: The Camel Country</h2>
+                </div>
+                <p><b>Junagarh Fort</b><br>
+                  A well-preserved fort with beautiful palaces and temples.
+                  <br><b>Karni Mata Temple</b><br>
+                  Known for its resident rats, considered sacred.
+                  <br> -->
+                  
+  <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Jaisalmer: The Golden City</h2>
+                </div>
+                <p><b>Jaisalmer Fort</b><br>
+                  A massive fort made of yellow sandstone.
+                  <br><b>Patwon Ki Haveli</b><br>
+                  A collection of five havelis with intricate architecture.
+                  <br><b>Sam Sand Dunes</b><br>
+                  A popular spot for camel safaris and experiencing the desert.
+                </p>
+
+
+
+                  <!-- <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Ajmer</h2>
+                    </div>
+                <p><b>Ajmer Sharif Dargah</b><br>
+                A Sufi shrine dedicated to Moinuddin Chishti.
+                <br> <b>Ana Sagar Lake</b> <br>
+                A scenic artificial lake. -->
+
+                </p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="6r.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+                 <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Bikaner: The Camel Country</h2>
+                </div>
+                <p><b>Junagarh Fort</b><br>
+                  A well-preserved fort with beautiful palaces and temples.
+                  <br><b>Karni Mata Temple</b><br>
+                  Known for its resident rats, considered sacred.
+                  <br> 
+
+                <!-- <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Ajmer</h2>
+                </div>
+                <p><b>Ajmer Sharif Dargah</b><br>
+                  A Sufi shrine dedicated to Moinuddin Chishti.
+                  <br> <b>Ana Sagar Lake</b> <br>
+                  A scenic artificial lake. -->
+                <!-- <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Mount Abu: The Only Hill Station in Rajasthan</h2>
+                </div>
+                <p>
+                  <b>Dilwara Temples</b><br>
+                  Exquisite Jain temples known for their intricate marble carvings.
+                  <br><b>Nakki Lake</b><br>
+                  A serene lake surrounded by hills and temples.
+                  <br> <b>Shekhawati Region</b><br>
+
+                <p>Known for its painted havelis (mansions) adorned with frescoes.</p>
+
+                Rajasthan's tourism is not just about historical sites; it also offers a glimpse into the vibrant
+                culture through folk music, dance, colorful festivals, traditional crafts, and delicious cuisine. The
+                state's warm
+                hospitality and diverse attractions make it a captivating destination for tourists from around the
+                world.
+
+                </p> -->
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="7r.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+
+              
+               <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Ajmer</h2>
+                    </div>
+                <p><b>Ajmer Sharif Dargah</b><br>
+                A Sufi shrine dedicated to Moinuddin Chishti.
+                <br> <b>Ana Sagar Lake</b> <br>
+                A scenic artificial lake.
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="ajmer.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Mount Abu: Only Hill Station in Rajasthan </h2>
+                </div>
+                <p><b>Dilwara Temples</b><br>
+                  Exquisite Jain temples known for their intricate marble carvings.
+                  <br><b>Nakki Lake</b><br>
+                  A serene lake surrounded by hills and temples.
+                  <br>
+                
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="mount.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="my-content">
+
+                <div class="animated-text">
+                  <h2 class="typed" style="color: #004f9e; font-family: 'High Tower Text', sans-serif;">
+                    Shekhawati Region</h2>
+                </div>
+                  <p>Known for its painted havelis (mansions) adorned with frescoes.</p><br>
+                  Rajasthan's tourism is not just about historical sites; it also offers a glimpse into the vibrant culture through folk music, dance, colorful festivals, traditional crafts, and delicious cuisine. The state's warm
+                  hospitality and diverse attractions make it a captivating destination for tourists from around the world.
+                  
+                
+
+                </p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="sekhwati.png" class="img-fluid" alt="Right Side Image" style="border-radius: 0px;">
+            </div>
+          </div>
+        </div>
+      </div>
+   
+
+    </div>
+ 
+    <div style="margin-top: 25px;" class="container">
+      <div class="row">
+        <div class="col-md-5 col-lg-5"></div>
+        <div class="col-md-2 text-center">
+          <a class="carousel-control-prev" href="#myCarousel3" role="button" data-slide="prev"> <span
+              class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+          <a class="carousel-control-next" href="#myCarousel3" role="button" data-slide="next"> <span
+              class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+        </div>
+        <div class="col-md-5 col-lg-5"></div>
+      </div>
+    </div>
+
+
+  </div>
+
+  </div>
+  </div>
+  </div>
+  <div class="container mt-5">
+    <h3 class="typed" style="color: #004f9e; text-align: center; font-family: 'High Tower Text', sans-serif;">
+      Travel Tips</h3>
+    <div class="row mt-4">
+      <!-- Left Side -->
+      <div class="col-md-6">
+    
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;">   <i class="fas fa-route icon"></i> How to Reach ?</h3>
+        <p><i style="color:#FFC000;padding-right:5px;" class="fas fa-plane"> </i> <b>Jaipur International Airport (JAI)</b> is the main
+          airport in
+          Rajasthan, well-connected to major cities in India and some international destinations. Other airports in
+          Rajasthan include Jodhpur, Udaipur, and Kota. <b>Indira Gandhi International Airport</b> in <b>Delhi</b> is a
+          major gateway
+          to Rajasthan. From Delhi, you can take domestic flights to airports in Rajasthan
+        </p>
+        <p><i style="color:#FFC000;padding-right:5px;" class="fas fa-train"></i> Every major city in Rajasthan like Jaipur, Jodhpur,
+          Udaipur, Bikaner and Ajmer have Railway stations which are well connected from Delhi and other places of the
+          country.
+        </p>
+        <p><i style="color:#FFC000;padding-right:5px;" class="fas fa-road road-icon"></i> Rajasthan is well-connected by a network of
+          national highways & state highways. They are well-maintained and connect different cities and towns within
+          Rajasthan.</p>
+
+        <h3 style="color: #FFC000;padding-right:5px; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-sun weather-icon"></i>
+          Weather
+        </h3>
+        <p>Rajasthan can have extreme temperatures, so pack accordingly. Summers can be very hot, and winters can be
+          chilly, especially in the desert regions.
+
+
+        </p>
+      </div>
+
+      <!-- Right Side -->
+      <div class="col-md-6">
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i
+            class="fas fa-tshirt clothing-icon"></i> Clothing
+        </h3>
+        <p>Pack modest clothing, especially if planning to visit religious sites. Consider the weather conditions during
+          your stay.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-shield-alt"></i>
+          Safety Guidelines
+        </h3>
+        <p>Be aware of safety guidelines & Covid Guidelines issued by the government.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i
+            class="fas fa-shopping-bag shopping-icon"></i>
+          Shopping
+        </h3>
+        <p>Rajasthan is known for its handicrafts. Bargain while shopping in local markets (bazaars) to get a fair
+          price.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"> <i class="fas fa-car car-icon"></i>
+          Transportation
+        </h3>
+        <p>For local transportation you may use local taxis, KIOSK bases cabs and/or App based cabs.
+        </p>
+        <h3 style="color: #FFC000; font-family: 'High Tower Text', sans-serif;"><i class="fas fa-passport"></i> Visa
+          Requirements
+        </h3>
+        <p>
+          Check and obtain the necessary visa for your stay in India. For more details please
+          <a href="https://www.mpsnewdelhi.org/visa-information">click here</a>.
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap JS (Optional - for certain components) -->
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $('#myCarousel').carousel({
+      interval: 25000,
+    })
+    $('#myCarousel1').carousel({
+      interval: 25000,
+    })
+    $('#myCarousel2').carousel({
+      interval: 25000,
+    })
+    $('#myCarousel3').carousel({
+      interval: 25000,
+    })
+    // let currentIndex = 0;
+    // const sliderItems = document.querySelectorAll('.slider-item');
+    // const images = [
+    //   'airport.jpg', // Replace this with your local image path for slide 1
+    //   'path/to/local/image2.jpg', // Replace this with your local image path for slide 2
+    //   'path/to/local/image3.jpg', // Replace this with your local image path for slide 3
+    //   'path/to/local/image4.jpg', // Replace this with your local image path for slide 4
+    //   'path/to/local/image5.jpg'  // Replace this with your local image path for slide 5
+    // ];
+
+    // function changeSlide() {
+    //   currentIndex = (currentIndex + 1) % sliderItems.length;
+    //   for (let i = 0; i < sliderItems.length; i++) {
+    //     sliderItems[i].classList.remove('active');
+    //   }
+    //   sliderItems[currentIndex].classList.add('active');
+
+    //   const imageContainer = document.querySelector('.image-container img');
+    //   imageContainer.src = images[currentIndex];
+    // }
+
+    // setInterval(changeSlide, 10000); // Change slide every 2 seconds
+  </script>
+</body>
+
+</html>
